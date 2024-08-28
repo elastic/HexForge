@@ -26,4 +26,4 @@ This section will help you understand how to add new modules to the `hexforge_mo
 
 You can follow the example provided below for XOR decryption:
 
-https://github.com/elastic/HexForge/blob/984c40d24a8a2fa3ccb52264961bdeb679e0ff69/hexforge_modules/crypto.py#L202
+https://github.com/elastic/HexForge/blob/ac8d118d30f9c784514a63caf2e3fd391b378ffb/hexforge_modules/crypto.py#L202
