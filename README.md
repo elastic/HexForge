@@ -9,6 +9,9 @@ This IDA plugin extends the functionality of the assembly and hex view. With thi
   - XOR
   - Base64
 
+## How to install
+Install the required libraries via `pip install -r requirements.txt`, then copy the latest version of `hexforge_module` and `HexForge.py` into your IDA Pro plugins directory.
+
 
 ## How to use
 Select the data in IDA hex view or disassembly view and right click to get the menu
