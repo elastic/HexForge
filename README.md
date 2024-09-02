@@ -16,8 +16,6 @@ Install the required libraries via `pip install -r requirements.txt`, then copy 
 ## How to use
 Select the data in IDA hex view or disassembly view and right click to get the menu
 
-![image](https://github.com/user-attachments/assets/fb597d92-a12e-4755-b305-506197724014)
-
 
 ### How to add a module
 This section will help you understand how to add new modules to the `hexforge_modules` package. By following these steps, you can create custom modules that integrate seamlessly with the Hexforge framework.
