@@ -18,7 +18,7 @@ Select the data in IDA hex view or disassembly view and right click to get the m
 
 
 
-![image](https://github.com/user-attachments/assets/fb597d92-a12e-4755-b305-506197724014)
+![image](images/hexforge.png)
 
 
 ### How to add a module
