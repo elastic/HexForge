@@ -1,22 +1,22 @@
 import idaapi
 import inspect
 
-from hexforge_modules import crypto, encoding, misc, search
-from hexforge_modules.search import SearchVirustotalBytes, SearchVirustotalString, SearchGitHub, SearchGoogle, SearchGrepApp
+from hexforge_modules import crypto_modules, encoding_modules, misc_modules, search_modules
+from hexforge_modules.search_modules import SearchVirustotalBytes, SearchVirustotalString, SearchGitHub, SearchGoogle, SearchGrepApp
 
 CRYPTO_MODULE_PATH = "HexForge/crypto/"
 ENCODING_MODULE_PATH = "HexForge/encoding/"
 MISC_MODULE_PATH = "HexForge/misc/"
 SEARCH_MODULE_PATH = "HexForge/search/"
 
-g_crypto_modules = [cls() for _, cls in inspect.getmembers(crypto, inspect.isclass)]
-g_encoding_modules = [cls() for _, cls in inspect.getmembers(encoding, inspect.isclass)]
-g_misc_modules = [cls() for _, cls in inspect.getmembers(misc, inspect.isclass)]
-g_search_modules = [cls() for _, cls in inspect.getmembers(search, inspect.isclass)]
 
 ida_version = idaapi.get_kernel_version()
 is_ida_9_or_later = float(ida_version) >= 9.0
 
+g_crypto_modules = []
+g_encoding_modules = []
+g_misc_modules = []
+g_search_modules = []
 
 class hexforge_plugin_t(idaapi.plugin_t):
     flags = idaapi.PLUGIN_KEEP
@@ -25,7 +25,16 @@ class hexforge_plugin_t(idaapi.plugin_t):
     wanted_name = "HexForge"
 
     def init(self):
+        global g_crypto_modules
+        global g_encoding_modules
+        global g_misc_modules
+        global g_search_modules
+
         idaapi.msg("init() called!\n")
+        g_crypto_modules = self._init_modules(crypto_modules)
+        g_encoding_modules = self._init_modules(encoding_modules)
+        g_misc_modules = self._init_modules(misc_modules)
+        g_search_modules = self._init_modules(search_modules)
         self._init_actions()
         self._init_hooks()
         return idaapi.PLUGIN_KEEP
@@ -40,6 +49,14 @@ class hexforge_plugin_t(idaapi.plugin_t):
     # --------------------------------------------------------------------------
     # Initializations
     # --------------------------------------------------------------------------
+    def _init_modules(self, modules) -> None:
+        initialized_modules = []
+        for _, cls in inspect.getmembers(modules, inspect.isclass):
+            try:
+                initialized_modules.append(cls())
+            except Exception as e:
+                idaapi.msg(f"Failed to initialize {cls.__name__}: {e}\n")
+        return initialized_modules
 
     def _init_actions(self) -> None:
         for module in g_crypto_modules + g_encoding_modules + g_misc_modules + g_search_modules:
