@@ -3,7 +3,7 @@
   "plugin": {
     "name": "HexForge",
     "entryPoint": "HexForge.py",
-    "categories": ["api-scripting-and-automation"],
+    "categories": ["API-scripting-and-automation"],
     "logoPath": "HexForge_logo.png",
     "idaVersions": ">=8.4",
     "description": "This IDA plugin extends the functionality of the assembly and hex view. With this plugin, you can conveniently decode/decrypt/alter data directly from the IDA Pro interface",
